@@ -1,0 +1,38 @@
+Anomaly Detection
+-----------------
+
+A stream of data may contain anomalous values.  Suppose a service is queried
+periodically and the response time captured.  What represents an anomalous value
+for that response time?
+
+One solution is to choose a data sample size, and measure the mean and standard
+deviation of that sample, then look for values that lie outside a 1-sigma range
+either side of the mean.
+
+
+Usage
+-----
+
+The command line has three sections describing the input, the algorithm, and the
+output:
+
+    anomaly [input] [algorithm] [output]
+
+Input
+    <file> | -
+
+Algorithm
+    -algorithm stddev    (default)
+    -sample <size>       (default 24)
+    -coefficient <coeff> (default 1.0)
+    -no-min              Do not trigger for mean-(coeff*sigma)
+    -no-max              Do not trigger for mean+(coeff*sigma)
+
+    -algorithm threshold
+    -value <N>
+
+Output
+    <file> | -
+    -quiet
+    -execute <program>
+
