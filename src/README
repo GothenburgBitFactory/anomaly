@@ -16,10 +16,7 @@ Usage
 The command line has three sections describing the input, the algorithm, and the
 output:
 
-    anomaly [input] [algorithm] [reaction]
-
-Input
-    <file> | -
+    anomaly [algorithm] [reaction]
 
 Algorithm
     -over                Trigger high value
@@ -30,13 +27,10 @@ Algorithm
     -coefficient <coeff> (default 1.0)
 
     -algorithm threshold
-    -value <N>
 
 Reaction
-    <file> | -
     -quiet
     -execute <program>
     -sigusr1 <pid>
     -log <file>
-    -verbose
 

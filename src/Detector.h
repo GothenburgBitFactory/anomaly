@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
-// anomaly - Anomalous data detection
+// Detector - Anomalous data detection
 //
 // Copyright 2013, Göteborg Bit Factory.
 //
@@ -24,48 +24,46 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
-//#include <iostream>
-//#include <vector>
-//#include <stdlib.h>
-//#include <math.h>
+#ifndef INCLUDED_DETECTOR_H
+#define INCLUDED_DETECTOR_H
 
-////////////////////////////////////////////////////////////////////////////////
-int algorithm_sigma ()
+#include <string>
+
+class Detector
 {
-/*
-  // Process arguments from command line.
-  std::vector <double> data;
-  for (int i = 1; i < argc; i++)
-    data.push_back (strtod (argv[i], NULL));
+public:
+  Detector ();
+  void algorithm (const std::string&);
+  void upper (double);
+  void lower (double);
+  void sample (int);
+  void coefficient (double);
+  void quiet ();
+  void execute (const std::string&);
+  void pid (int);
 
-  double sigma = 0.0;
-  double mean = 0.0;
+  void run ();
 
-  int n = data.size ();
-  if (n > 1)
-  {
-    // Calculate mean, standard deviation.
-    double sum = 0.0;
-    double sum_squares = 0.0;
-    std::vector <double>::iterator i;
-    for (i = data.begin (); i != data.end (); ++i)
-    {
-      sum += *i;
-      sum_squares += (*i) * (*i);
-    }
+private:
+  void run_threshold ();
+  void run_stddev ();
+  void react ();
+  void react_complain ();
+  void react_execute ();
+  void react_sigusr1 ();
 
-    sigma = sqrt (((n * sum_squares) - (sum * sum)) / (n * (n - 1)));
-    mean = sum / n;
-  }
-  else if (n > 0)
-  {
-    mean = data[0];
-  }
+private:
+  std::string _algorithm;
+  bool        _use_upper;
+  bool        _use_lower;
+  double      _upper;
+  double      _lower;
+  int         _sample;
+  double      _coefficient;
+  bool        _quiet;
+  std::string _script;
+  int         _pid;
+};
 
-  std::cout << mean  << "\n"
-            << sigma << "\n";
-*/
-  return 0;
-}
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////

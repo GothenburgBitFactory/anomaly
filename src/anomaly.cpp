@@ -26,7 +26,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <stdlib.h>
-#include <anomaly.h>
+#include <Detector.h>
 #include <cmake.h>
 #include <commit.h>
 
@@ -37,10 +37,17 @@ static int usage ()
             << "Usage: anomaly [options]\n"
             << "\n"
             << "Options:\n"
-            << "  -h|--help         Show this message\n"
-            << "  -v|--version      Show anomaly version & copyright\n"
-            << "  -s|--stddev       Standard Deviation algorithm (default)\n"
-            << "  -t|--threshold    Threshold algorithm\n"
+            << "  -h|--help                Show this message\n"
+            << "  -v|--version             Show anomaly version & copyright\n"
+            << "  -s|--stddev              Standard Deviation algorithm (default)\n"
+            << "  -t|--threshold           Threshold algorithm\n"
+            << "  -u|--upper <limit>       Upper threshold\n"
+            << "  -l|--lower <limit>       Lower threshold\n"
+            << "  -n|--sample <count>      Sample size\n"
+            << "  -c|--coefficient <coeff> Coefficient for --stddev\n"
+            << "  -q|--quiet               Suppresses output\n"
+            << "  -p|--pid <PID>           PID to signal with sigusr1\n"
+            << "  -e|--execute <program>   Run program\n"
             << "\n";
 
   return 0;
@@ -93,13 +100,12 @@ int main (int argc, char** argv)
 {
   try
   {
-    // Process command line arguments.
-    std::string algorithm = "stddev";
-    int sample            = 5;
-    double coefficient    = 1.0;
-    double limit          = 1.0;
-    bool over             = true;
+    if (argc < 2)
+      return usage ();
 
+    Detector detector;
+
+    // Process command line arguments.
     for (int i = 1; i < argc; ++i)
     {
       if (!strcmp (argv[i], "-h") || !strcmp (argv[i], "--help"))
@@ -108,35 +114,39 @@ int main (int argc, char** argv)
       else if (!strcmp (argv[i], "-v") || !strcmp (argv[i], "--version"))
         return version ();
 
-      else if (!strcmp (argv[i], "-s") || !strcmp (argv[i], "--stddev"))
-        algorithm = "stddev";
-
       else if (!strcmp (argv[i], "-t") || !strcmp (argv[i], "--threshold"))
-        algorithm = "threshold";
+        detector.algorithm ("threshold");
 
-      else if (!strcmp (argv[i], "-o") || !strcmp (argv[i], "--over"))
-      {
-        limit = strtod (argv[++i], NULL);
-        over = true;
-      }
+      else if (!strcmp (argv[i], "-u") || !strcmp (argv[i], "--upper"))
+        detector.upper (strtod (argv[++i], NULL));
 
-      else if (!strcmp (argv[i], "-u") || !strcmp (argv[i], "--under"))
-      {
-        limit = strtod (argv[++i], NULL);
-        over = false;
-      }
+      else if (!strcmp (argv[i], "-l") || !strcmp (argv[i], "--lower"))
+        detector.lower (strtod (argv[++i], NULL));
+
+      else if (!strcmp (argv[i], "-s") || !strcmp (argv[i], "--stddev"))
+        detector.algorithm ("stddev");
 
       else if (!strcmp (argv[i], "-n") || !strcmp (argv[i], "--sample"))
-        sample = strtol (argv[++i], NULL, 10);
+        detector.sample (strtol (argv[++i], NULL, 10));
 
-/*
-      else error?
-*/
+      else if (!strcmp (argv[i], "-c") || !strcmp (argv[i], "--coefficient"))
+        detector.coefficient (strtod (argv[++i], NULL));
+
+      else if (!strcmp (argv[i], "-q") || !strcmp (argv[i], "--quiet"))
+        detector.quiet ();
+
+      else if (!strcmp (argv[i], "-p") || !strcmp (argv[i], "--pid"))
+        detector.pid (strtol (argv[++i], NULL, 10));
+
+      else if (!strcmp (argv[i], "-e") || !strcmp (argv[i], "--execute"))
+        detector.execute (argv[++i]);
+
+      else
+        throw std::string ("unrecognized argument '") + argv[i] + "'.";
     }
 
     // Dispatch to selected algorithm.
-         if (algorithm == "stddev")    return algorithm_sigma ();
-    else if (algorithm == "threshold") return algorithm_threshold (limit, over);
+    detector.run ();
   }
 
   catch (const std::string& error)
