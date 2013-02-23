@@ -1,0 +1,44 @@
+.TH anomaly 1 YYYY-MM-DD "${PACKAGE_STRING}" "User Manuals"
+
+.SH NAME
+anomaly \- anomalous data detection
+
+.SH SYNOPSIS
+.B anomaly [-h|--help] [-v|--version]
+
+.SH DESCRIPTION
+In the follow stream of data, which represents service response times, can you
+spot the outlying data point?
+
+    3  4  5  3  2  4  3  5  3  21  5  4
+
+Of course, that '21' is unusually high.
+
+
+.SH CONFIGURATION FILE AND OVERRIDE OPTIONS
+
+.SH EXAMPLES
+
+.SH "CREDITS & COPYRIGHTS"
+Copyright (C) 2013 P. Beckingham, F. Hernandez.
+Copyright (C) 2013 Göteborg Bit Factory.
+
+Anomaly is distributed under the MIT license. See
+http://www.opensource.org/licenses/mit-license.php for more information.
+
+.SH SEE ALSO
+
+For more information, see:
+
+.TP
+The official site at
+<http://tasktools.org/projects/anomaly.html>
+
+.TP
+You can contact the project by writing an email to
+<support@tasktools.org>
+
+.SH REPORTING BUGS
+.TP
+Bugs in anomaly may be reported to <support@tasktools.org>
+
