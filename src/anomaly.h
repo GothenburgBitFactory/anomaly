@@ -29,10 +29,10 @@
 
 // Detection methods.
 int algorithm_sigma ();
-int algorithm_threshold ();
+int algorithm_threshold (double, bool);
 
 // Reaction methods.
-int react_compliain ();
+int react_complain ();
 int react_execute ();
 
 #endif

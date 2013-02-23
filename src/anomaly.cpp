@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
+#include <stdlib.h>
 #include <anomaly.h>
 #include <cmake.h>
 #include <commit.h>
@@ -33,7 +34,13 @@
 static int usage ()
 {
   std::cout << "\n"
-            << "Usage: anomaly [-h|--help] [-v|--version]\n"
+            << "Usage: anomaly [options]\n"
+            << "\n"
+            << "Options:\n"
+            << "  -h|--help         Show this message\n"
+            << "  -v|--version      Show anomaly version & copyright\n"
+            << "  -s|--stddev       Standard Deviation algorithm (default)\n"
+            << "  -t|--threshold    Threshold algorithm\n"
             << "\n";
 
   return 0;
@@ -84,19 +91,65 @@ static int version ()
 ////////////////////////////////////////////////////////////////////////////////
 int main (int argc, char** argv)
 {
-  // TODO Process command line arguments.
-  for (int i = 1; i < argc; ++i)
+  try
   {
-    if (!strcmp (argv[i], "-h") || !strcmp (argv[i], "--help"))
-      return usage ();
+    // Process command line arguments.
+    std::string algorithm = "stddev";
+    int sample            = 5;
+    double coefficient    = 1.0;
+    double limit          = 1.0;
+    bool over             = true;
 
-    else if (!strcmp (argv[i], "-v") || !strcmp (argv[i], "--version"))
-      return version ();
+    for (int i = 1; i < argc; ++i)
+    {
+      if (!strcmp (argv[i], "-h") || !strcmp (argv[i], "--help"))
+        return usage ();
+
+      else if (!strcmp (argv[i], "-v") || !strcmp (argv[i], "--version"))
+        return version ();
+
+      else if (!strcmp (argv[i], "-s") || !strcmp (argv[i], "--stddev"))
+        algorithm = "stddev";
+
+      else if (!strcmp (argv[i], "-t") || !strcmp (argv[i], "--threshold"))
+        algorithm = "threshold";
+
+      else if (!strcmp (argv[i], "-o") || !strcmp (argv[i], "--over"))
+      {
+        limit = strtod (argv[++i], NULL);
+        over = true;
+      }
+
+      else if (!strcmp (argv[i], "-u") || !strcmp (argv[i], "--under"))
+      {
+        limit = strtod (argv[++i], NULL);
+        over = false;
+      }
+
+      else if (!strcmp (argv[i], "-n") || !strcmp (argv[i], "--sample"))
+        sample = strtol (argv[++i], NULL, 10);
+
+/*
+      else error?
+*/
     }
 
-  // TODO Initialize input stream.
-  // TODO Initialize output stream.
-  // TODO Dispatch to selected algorithm.
+    // Dispatch to selected algorithm.
+         if (algorithm == "stddev")    return algorithm_sigma ();
+    else if (algorithm == "threshold") return algorithm_threshold (limit, over);
+  }
+
+  catch (const std::string& error)
+  {
+    std::cout << error << "\n";
+    return -1;
+  }
+
+  catch (...)
+  {
+    std::cout << "Unknown error\n";
+    return -2;
+  }
 
   return 0;
 }

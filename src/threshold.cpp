@@ -24,14 +24,24 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
-//#include <iostream>
+#include <iostream>
 //#include <vector>
 //#include <stdlib.h>
 //#include <math.h>
 
 ////////////////////////////////////////////////////////////////////////////////
-int algorithm_threshold ()
+int algorithm_threshold (double value, bool over)
 {
+  double input;
+  while (std::cin >> input)
+  {
+//    std::cout << "# read: " << input << "\n";
+
+    if ((over && input >= value) ||
+       (!over && input <= value))
+      std::cout << "ALERT\n";
+  }
+
   return 0;
 }
 

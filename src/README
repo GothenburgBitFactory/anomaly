@@ -16,23 +16,27 @@ Usage
 The command line has three sections describing the input, the algorithm, and the
 output:
 
-    anomaly [input] [algorithm] [output]
+    anomaly [input] [algorithm] [reaction]
 
 Input
     <file> | -
 
 Algorithm
+    -over                Trigger high value
+    -under               Trigger low value
+
     -algorithm stddev    (default)
     -sample <size>       (default 24)
     -coefficient <coeff> (default 1.0)
-    -no-min              Do not trigger for mean-(coeff*sigma)
-    -no-max              Do not trigger for mean+(coeff*sigma)
 
     -algorithm threshold
     -value <N>
 
-Output
+Reaction
     <file> | -
     -quiet
     -execute <program>
+    -sigusr1 <pid>
+    -log <file>
+    -verbose
 

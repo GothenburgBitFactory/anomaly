@@ -28,9 +28,27 @@
 
 use strict;
 use warnings;
-use Test::More tests => 1;
+use Test::More tests => 6;
 
-fail ('Sample unit test.');
+# anomaly --threshold --over 3.14
+my $output = qx{echo '1' | ../src/anomaly --threshold --over 3.14};
+is ($output, '', 'threshold (over 3.14) 1 -->');
+
+$output = qx{echo '1 2' | ../src/anomaly --threshold --over 3.14};
+is ($output, '', 'threshold (over 3.14) 1 2 -->');
+
+$output = qx{echo '1 2 3' | ../src/anomaly --threshold --over 3.14};
+is ($output, '', 'threshold (over 3.14) 1 2 3 -->');
+
+$output = qx{echo '1 2 3 4' | ../src/anomaly --threshold --over 3.14};
+isnt ($output, '', 'threshold (over 3.14) 1 2 3 4 --> ALERT');
+
+# anomaly --threshold --under 3.14
+$output = qx{echo '4' | ../src/anomaly --threshold --under 3.14};
+is ($output, '', 'threshold (under 3.14) 4 -->');
+
+$output = qx{echo '4 3' | ../src/anomaly --threshold --under 3.14};
+isnt ($output, '', 'threshold (under 3.14) 4 3 --> ALERT');
 
 exit 0;
 
