@@ -1,7 +1,14 @@
 ------ current release ---------------------------
 
 1.0.0 () <sha1>
- + 
+ + Unit test suite.
+ + Implements '--pid' to signal a program on detection.
+ + Implements '--execute' to run arbitrary programs on detection.
+ + Implements '--quiet' to prevent output.
+ + Implements '--stddev' detection with '--coefficient' (multiplied by sigma)
+   and '--sample' (sample size) support.
+ + Implements '--threshold' detection with '--upper' and '--lower' bounds
+   support.
  + Has initial anomaly.1 man page.
  + Uses cmake build system.
 

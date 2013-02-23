@@ -28,29 +28,34 @@
 
 use strict;
 use warnings;
-use Test::More tests => 8;
+use Test::More tests => 9;
 
-# anomaly --threshold --upper 3.14
-my $output = qx{echo '1' | ../src/anomaly --threshold --upper 3.14};
-is ($output, '', 'threshold (upper 3.14) 1 -->');
-$output = qx{echo '1 2' | ../src/anomaly --threshold --upper 3.14};
-is ($output, '', 'threshold (upper 3.14) 1 2 -->');
-$output = qx{echo '1 2 3' | ../src/anomaly --threshold --upper 3.14};
-is ($output, '', 'threshold (upper 3.14) 1 2 3 -->');
-$output = qx{echo '1 2 3 4' | ../src/anomaly --threshold --upper 3.14};
-is ($output, "Anomaly\n", 'threshold (upper 3.14) 1 2 3 4 --> Anomaly');
+my $output = qx{../src/anomaly --foo};
+like ($output, qr/Unrecognized/, 'Unrecognized arg -foo');
 
-# anomaly --threshold --lower 3.14
-$output = qx{echo '4' | ../src/anomaly --threshold --lower 3.14};
-is ($output, '', 'threshold (lower 3.14) 4 -->');
-$output = qx{echo '4 3' | ../src/anomaly --threshold --lower 3.14};
-is ($output, "Anomaly\n", 'threshold (lower 3.14) 4 3 --> Anomaly');
+$output = qx{../src/anomaly --threshold --upper 3.1 --lower 3.2};
+like ($output, qr/must be lower/, '--lower > --higher');
 
-# Test '--execute'
-$output = qx{echo '1' | ../src/anomaly --threshold --upper 2 --execute 'echo hello' --quiet};
-is ($output, '', 'threshold --> no execute');
-$output = qx{echo '3' | ../src/anomaly --threshold --upper 2 --execute 'echo hello' --quiet};
-is ($output, "hello\n", 'threshold --> execute');
+$output = qx{../src/anomaly --threshold --lower 3.2 --upper 3.1};
+like ($output, qr/must be higher/, '--lower > --higher');
+
+$output = qx{../src/anomaly --stddev --sample 1};
+like ($output, qr/Sample size/, '--sample < 2');
+
+$output = qx{../src/anomaly --execute ''};
+like ($output, qr/non-trivial path/, '--execute \'\'');
+
+$output = qx{../src/anomaly --pid 0};
+like ($output, qr/non-zero/, '--pid 0');
+
+$output = qx{../src/anomaly --threshold};
+like ($output, qr/or both/, '--threshold, no bounds');
+
+$output = qx{../src/anomaly --quiet};
+like ($output, qr/reaction must be/, 'no reaction');
+
+$output = qx{../src/anomaly --coefficient 0.0000001};
+like ($output, qr/non-trivial coefficient/, '--coefficient 0.0000001');
 
 exit 0;
 
