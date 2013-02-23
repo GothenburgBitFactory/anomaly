@@ -142,7 +142,7 @@ int main (int argc, char** argv)
         detector.execute (argv[++i]);
 
       else
-        throw std::string ("unrecognized argument '") + argv[i] + "'.";
+        throw std::string ("Unrecognized argument '") + argv[i] + "'.";
     }
 
     // Dispatch to selected algorithm.

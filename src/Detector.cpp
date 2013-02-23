@@ -161,11 +161,8 @@ void Detector::run_stddev ()
   double input;
   while (std::cin >> input)
   {
-    data.push_back (input);
-    if (data.size () > _sample)
+    if (data.size () >= _sample)
     {
-      data.pop_front ();
-
       // Calculate mean, standard deviation.
       double sum = 0.0;
       double sum_squares = 0.0;
@@ -180,10 +177,14 @@ void Detector::run_stddev ()
                            (_sample * (_sample - 1)));
       double mean = sum / _sample;
 
-      if ((input <= mean - _coefficient * sigma) ||
-          (input >= mean + _coefficient * sigma))
+      if ((input < (mean - (_coefficient * sigma))) ||
+          (input > (mean + (_coefficient * sigma))))
         react ();
     }
+
+    data.push_back (input);
+    if (data.size () > _sample)
+      data.pop_front ();
   }
 }
 
@@ -200,7 +201,7 @@ void Detector::react_complain ()
 {
   if (!_quiet)
   {
-    std::cout << "ALERT\n";
+    std::cout << "Anomaly\n";
   }
 }
 
