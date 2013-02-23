@@ -25,9 +25,78 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
+#include <anomaly.h>
+#include <cmake.h>
+#include <commit.h>
 
+////////////////////////////////////////////////////////////////////////////////
+static int usage ()
+{
+  std::cout << "\n"
+            << "Usage: anomaly [-h|--help] [-v|--version]\n"
+            << "\n";
+
+  return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+static int version ()
+{
+  std::cout << "\n"
+            << PACKAGE_STRING
+#if defined (HAVE_COMMIT)
+            << "."
+            << COMMIT
+#endif
+            << " built for "
+#if defined (DARWIN)
+            << "darwin"
+#elif defined (SOLARIS)
+            << "solaris"
+#elif defined (CYGWIN)
+            << "cygwin"
+#elif defined (OPENBSD)
+            << "openbsd"
+#elif defined (HAIKU)
+            << "haiku"
+#elif defined (NETBSD)
+            << "netbsd"
+#elif defined (FREEBSD)
+            << "freebsd"
+#elif defined (LINUX)
+            << "linux"
+#else
+            << "unknown"
+#endif
+            << "\n"
+            << "Copyright (C) 2013 Göteborg Bit Factory\n"
+            << "\n"
+            << "Anomaly may be copied only under the terms of the MIT "
+               "license, which may be found in the source kit.\n"
+            << "\n"
+            << "Documentation for anomaly can be found using 'man anomaly' "
+               "or at http://tasktools.org/projects/anomaly.html\n"
+            << "\n";
+
+  return 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 int main (int argc, char** argv)
 {
+  // TODO Process command line arguments.
+  for (int i = 1; i < argc; ++i)
+  {
+    if (!strcmp (argv[i], "-h") || !strcmp (argv[i], "--help"))
+      return usage ();
+
+    else if (!strcmp (argv[i], "-v") || !strcmp (argv[i], "--version"))
+      return version ();
+    }
+
+  // TODO Initialize input stream.
+  // TODO Initialize output stream.
+  // TODO Dispatch to selected algorithm.
 
   return 0;
 }

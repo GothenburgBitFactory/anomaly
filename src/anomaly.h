@@ -24,48 +24,16 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
-//#include <iostream>
-//#include <vector>
-//#include <stdlib.h>
-//#include <math.h>
+#ifndef INCLUDED_ANOMALY_H
+#define INCLUDED_ANOMALY_H
 
-////////////////////////////////////////////////////////////////////////////////
-int algorithm_sigma ()
-{
-/*
-  // Process arguments from command line.
-  std::vector <double> data;
-  for (int i = 1; i < argc; i++)
-    data.push_back (strtod (argv[i], NULL));
+// Detection methods.
+int algorithm_sigma ();
+int algorithm_threshold ();
 
-  double sigma = 0.0;
-  double mean = 0.0;
+// Reaction methods.
+int react_compliain ();
+int react_execute ();
 
-  int n = data.size ();
-  if (n > 1)
-  {
-    // Calculate mean, standard deviation.
-    double sum = 0.0;
-    double sum_squares = 0.0;
-    std::vector <double>::iterator i;
-    for (i = data.begin (); i != data.end (); ++i)
-    {
-      sum += *i;
-      sum_squares += (*i) * (*i);
-    }
-
-    sigma = sqrt (((n * sum_squares) - (sum * sum)) / (n * (n - 1)));
-    mean = sum / n;
-  }
-  else if (n > 0)
-  {
-    mean = data[0];
-  }
-
-  std::cout << mean  << "\n"
-            << sigma << "\n";
-*/
-  return 0;
-}
-
+#endif
 ////////////////////////////////////////////////////////////////////////////////
