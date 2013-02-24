@@ -47,8 +47,8 @@ public:
 private:
   void run_threshold ();
   void run_stddev ();
-  void react ();
-  void react_complain ();
+  void react (const std::string&);
+  void react_complain (const std::string&);
   void react_execute ();
   void react_sigusr1 ();
 

@@ -25,6 +25,7 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
+#include <sstream>
 #include <deque>
 #include <stdlib.h>
 #include <math.h>
@@ -137,9 +138,28 @@ void Detector::run_threshold ()
 
   double input;
   while (std::cin >> input)
-    if ((_use_max && input >= _max) ||
-        (_use_min && input <= _min))
-      react ();
+  {
+    if (_use_max && input >= _max)
+    {
+      std::stringstream s;
+      s << "Anomalous data detected.  The value "
+        << input
+        << " is above the maximum of "
+        << _max
+        << ".";
+      react (s.str ());
+    }
+    else if (_use_min && input <= _min)
+    {
+      std::stringstream s;
+      s << "Anomalous data detected.  The value "
+        << input
+        << " is below the minimum of "
+        << _min
+        << ".";
+      react (s.str ());
+    }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -177,9 +197,34 @@ void Detector::run_stddev ()
                            (_sample * (_sample - 1)));
       double mean = sum / _sample;
 
-      if ((input < (mean - (_coefficient * sigma))) ||
-          (input > (mean + (_coefficient * sigma))))
-        react ();
+      if (input < (mean - (_coefficient * sigma)))
+      {
+        std::stringstream s;
+        s << "Anomalous data detected.  The value "
+          << input
+          << " is more than "
+          << _coefficient
+          << " sigma(s) below the mean value "
+          << mean
+          << ", with a sample size of "
+          << _sample
+          << ".";
+        react (s.str ());
+      }
+      else if (input > (mean + (_coefficient * sigma)))
+      {
+        std::stringstream s;
+        s << "Anomalous data detected.  The value "
+          << input
+          << " is more than "
+          << _coefficient
+          << " sigma(s) above the mean value "
+          << mean
+          << ", with a sample size of "
+          << _sample
+          << ".";
+        react (s.str ());
+      }
     }
 
     data.push_back (input);
@@ -189,38 +234,32 @@ void Detector::run_stddev ()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react ()
+void Detector::react (const std::string& message)
 {
-  react_complain ();
+  react_complain (message);
   react_sigusr1 ();
   react_execute ();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react_complain ()
+void Detector::react_complain (const std::string& message)
 {
   if (!_quiet)
-  {
-    std::cout << "Anomaly\n";
-  }
+    std::cout << message << "\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Detector::react_execute ()
 {
   if (_pid)
-  {
     kill (_pid, SIGUSR1);
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 void Detector::react_sigusr1 ()
 {
   if (_script != "")
-  {
     system (_script.c_str ());
-  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////

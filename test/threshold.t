@@ -38,13 +38,13 @@ is ($output, '', 'threshold (max 3.14) 1 2 -->');
 $output = qx{echo '1 2 3' | ../src/anomaly --threshold --max 3.14};
 is ($output, '', 'threshold (max 3.14) 1 2 3 -->');
 $output = qx{echo '1 2 3 4' | ../src/anomaly --threshold --max 3.14};
-is ($output, "Anomaly\n", 'threshold (max 3.14) 1 2 3 4 --> Anomaly');
+like ($output, qr/Anomalous data detected/, 'threshold (max 3.14) 1 2 3 4 --> Anomaly');
 
 # anomaly --threshold --min 3.14
 $output = qx{echo '4' | ../src/anomaly --threshold --min 3.14};
 is ($output, '', 'threshold (min 3.14) 4 -->');
 $output = qx{echo '4 3' | ../src/anomaly --threshold --min 3.14};
-is ($output, "Anomaly\n", 'threshold (min 3.14) 4 3 --> Anomaly');
+like ($output, qr/Anomalous data detected/, 'threshold (min 3.14) 4 3 --> Anomaly');
 
 # Test '--execute'
 $output = qx{echo '1' | ../src/anomaly --threshold --max 2 --execute 'echo hello' --quiet};

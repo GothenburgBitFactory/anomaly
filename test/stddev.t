@@ -43,7 +43,7 @@ is ($output, '', 'stddev (sample 5 coeff 1.0) 1 2 3 4 -->');
 $output = qx{echo '1 2 3 4 5' | ../src/anomaly --stddev --sample 5 --coefficient 1.0};
 is ($output, '', 'stddev (sample 5 coeff 1.0) 1 2 3 4 5 -->');
 $output = qx{echo '1 2 3 4 5 6' | ../src/anomaly --stddev --sample 5 --coefficient 1.0};
-is ($output, "Anomaly\n", 'stddev (sample 5 coeff 1.0) 1 2 3 4 5 6 --> Anomaly');
+like ($output, qr/Anomalous data detected/, 'stddev (sample 5 coeff 1.0) 1 2 3 4 5 6 --> Anomaly');
 
 exit 0;
 
