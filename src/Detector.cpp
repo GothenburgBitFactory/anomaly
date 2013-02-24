@@ -139,7 +139,7 @@ void Detector::run_threshold ()
   double input;
   while (std::cin >> input)
   {
-    if (_use_max && input >= _max)
+    if (_use_max && input > _max)
     {
       std::stringstream s;
       s << "Anomalous data detected.  The value "
@@ -149,7 +149,7 @@ void Detector::run_threshold ()
         << ".";
       react (s.str ());
     }
-    else if (_use_min && input <= _min)
+    else if (_use_min && input < _min)
     {
       std::stringstream s;
       s << "Anomalous data detected.  The value "
