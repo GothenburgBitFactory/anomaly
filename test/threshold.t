@@ -30,26 +30,26 @@ use strict;
 use warnings;
 use Test::More tests => 8;
 
-# anomaly --threshold --upper 3.14
-my $output = qx{echo '1' | ../src/anomaly --threshold --upper 3.14};
-is ($output, '', 'threshold (upper 3.14) 1 -->');
-$output = qx{echo '1 2' | ../src/anomaly --threshold --upper 3.14};
-is ($output, '', 'threshold (upper 3.14) 1 2 -->');
-$output = qx{echo '1 2 3' | ../src/anomaly --threshold --upper 3.14};
-is ($output, '', 'threshold (upper 3.14) 1 2 3 -->');
-$output = qx{echo '1 2 3 4' | ../src/anomaly --threshold --upper 3.14};
-is ($output, "Anomaly\n", 'threshold (upper 3.14) 1 2 3 4 --> Anomaly');
+# anomaly --threshold --max 3.14
+my $output = qx{echo '1' | ../src/anomaly --threshold --max 3.14};
+is ($output, '', 'threshold (max 3.14) 1 -->');
+$output = qx{echo '1 2' | ../src/anomaly --threshold --max 3.14};
+is ($output, '', 'threshold (max 3.14) 1 2 -->');
+$output = qx{echo '1 2 3' | ../src/anomaly --threshold --max 3.14};
+is ($output, '', 'threshold (max 3.14) 1 2 3 -->');
+$output = qx{echo '1 2 3 4' | ../src/anomaly --threshold --max 3.14};
+is ($output, "Anomaly\n", 'threshold (max 3.14) 1 2 3 4 --> Anomaly');
 
-# anomaly --threshold --lower 3.14
-$output = qx{echo '4' | ../src/anomaly --threshold --lower 3.14};
-is ($output, '', 'threshold (lower 3.14) 4 -->');
-$output = qx{echo '4 3' | ../src/anomaly --threshold --lower 3.14};
-is ($output, "Anomaly\n", 'threshold (lower 3.14) 4 3 --> Anomaly');
+# anomaly --threshold --min 3.14
+$output = qx{echo '4' | ../src/anomaly --threshold --min 3.14};
+is ($output, '', 'threshold (min 3.14) 4 -->');
+$output = qx{echo '4 3' | ../src/anomaly --threshold --min 3.14};
+is ($output, "Anomaly\n", 'threshold (min 3.14) 4 3 --> Anomaly');
 
 # Test '--execute'
-$output = qx{echo '1' | ../src/anomaly --threshold --upper 2 --execute 'echo hello' --quiet};
+$output = qx{echo '1' | ../src/anomaly --threshold --max 2 --execute 'echo hello' --quiet};
 is ($output, '', 'threshold --> no execute');
-$output = qx{echo '3' | ../src/anomaly --threshold --upper 2 --execute 'echo hello' --quiet};
+$output = qx{echo '3' | ../src/anomaly --threshold --max 2 --execute 'echo hello' --quiet};
 is ($output, "hello\n", 'threshold --> execute');
 
 exit 0;

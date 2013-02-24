@@ -34,8 +34,8 @@ class Detector
 public:
   Detector ();
   void algorithm (const std::string&);
-  void upper (double);
-  void lower (double);
+  void max (double);
+  void min (double);
   void sample (int);
   void coefficient (double);
   void quiet ();
@@ -54,10 +54,10 @@ private:
 
 private:
   std::string _algorithm;
-  bool        _use_upper;
-  bool        _use_lower;
-  double      _upper;
-  double      _lower;
+  bool        _use_max;
+  bool        _use_min;
+  double      _max;
+  double      _min;
   int         _sample;
   double      _coefficient;
   bool        _quiet;

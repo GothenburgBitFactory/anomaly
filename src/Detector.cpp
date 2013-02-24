@@ -34,10 +34,10 @@
 ////////////////////////////////////////////////////////////////////////////////
 Detector::Detector ()
 : _algorithm ("stddev")
-, _use_upper (false)
-, _use_lower (false)
-, _upper (0.0)
-, _lower (0.0)
+, _use_max (false)
+, _use_min (false)
+, _max (0.0)
+, _min (0.0)
 , _sample (10)
 , _coefficient (1.0)
 , _quiet (false)
@@ -57,23 +57,23 @@ void Detector::algorithm (const std::string& value)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::upper (double value)
+void Detector::max (double value)
 {
-  if (_use_lower && value < _lower)
-    throw std::string ("The upper value must be higher than the lower value.");
+  if (_use_min && value < _min)
+    throw std::string ("The max value must be higher than the min value.");
 
-  _use_upper = true;
-  _upper = value;
+  _use_max = true;
+  _max = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::lower (double value)
+void Detector::min (double value)
 {
-  if (_use_upper && value > _upper)
-    throw std::string ("The lower value must be lower than the upper value.");
+  if (_use_max && value > _max)
+    throw std::string ("The min value must be min than the max value.");
 
-  _use_lower = true;
-  _lower = value;
+  _use_min = true;
+  _min = value;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -126,8 +126,8 @@ void Detector::run ()
 void Detector::run_threshold ()
 {
   // Make sure settings are acceptable.
-  if (!_use_upper && !_use_lower)
-    throw std::string ("A lower, and upper, or both threshold values should be "
+  if (!_use_max && !_use_min)
+    throw std::string ("A min, and max, or both threshold values should be "
                        "specified.");
 
   if (_quiet &&
@@ -137,8 +137,8 @@ void Detector::run_threshold ()
 
   double input;
   while (std::cin >> input)
-    if ((_use_upper && input >= _upper) ||
-        (_use_lower && input <= _lower))
+    if ((_use_max && input >= _max) ||
+        (_use_min && input <= _min))
       react ();
 }
 

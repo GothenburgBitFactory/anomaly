@@ -1,7 +1,7 @@
 
 New Features in anomaly 1.1.0
 
-  - '--threshold' detection with '--upper' and '--lower' bounds.
+  - '--threshold' detection with '--min' and '--max' bounds.
   - '--stddev' detection, with '--sample' size and '--coefficient' scaling.
   - '--execute' can run arbitrary programs on detection.
   - '--pid' can signal a program on detection.

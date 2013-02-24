@@ -33,11 +33,11 @@ use Test::More tests => 9;
 my $output = qx{../src/anomaly --foo};
 like ($output, qr/Unrecognized/, 'Unrecognized arg -foo');
 
-$output = qx{../src/anomaly --threshold --upper 3.1 --lower 3.2};
-like ($output, qr/must be lower/, '--lower > --higher');
+$output = qx{../src/anomaly --threshold --max 3.1 --min 3.2};
+like ($output, qr/must be min/, '--min > --higher');
 
-$output = qx{../src/anomaly --threshold --lower 3.2 --upper 3.1};
-like ($output, qr/must be higher/, '--lower > --higher');
+$output = qx{../src/anomaly --threshold --min 3.2 --max 3.1};
+like ($output, qr/must be higher/, '--min > --higher');
 
 $output = qx{../src/anomaly --stddev --sample 1};
 like ($output, qr/Sample size/, '--sample < 2');

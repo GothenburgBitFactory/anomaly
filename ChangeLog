@@ -7,8 +7,7 @@
  + Implements '--quiet' to prevent output.
  + Implements '--stddev' detection with '--coefficient' (multiplied by sigma)
    and '--sample' (sample size) support.
- + Implements '--threshold' detection with '--upper' and '--lower' bounds
-   support.
+ + Implements '--threshold' detection with '--min' and '--max' bounds support.
  + Has initial anomaly.1 man page.
  + Uses cmake build system.
 

@@ -42,8 +42,8 @@ static int usage ()
             << "  -v|--version             Show anomaly version & copyright\n"
             << "  -s|--stddev              Standard Deviation algorithm (default)\n"
             << "  -t|--threshold           Threshold algorithm\n"
-            << "  -u|--upper <limit>       Upper threshold\n"
-            << "  -l|--lower <limit>       Lower threshold\n"
+            << "     --max <limit>         Upper threshold\n"
+            << "     --min <limit>         Lower threshold\n"
             << "  -n|--sample <count>      Sample size\n"
             << "  -c|--coefficient <coeff> Coefficient for --stddev\n"
             << "  -q|--quiet               Suppresses output\n"
@@ -118,11 +118,11 @@ int main (int argc, char** argv)
       else if (!strcmp (argv[i], "-t") || !strcmp (argv[i], "--threshold"))
         detector.algorithm ("threshold");
 
-      else if (!strcmp (argv[i], "-u") || !strcmp (argv[i], "--upper"))
-        detector.upper (strtod (argv[++i], NULL));
+      else if (!strcmp (argv[i], "--max"))
+        detector.max (strtod (argv[++i], NULL));
 
-      else if (!strcmp (argv[i], "-l") || !strcmp (argv[i], "--lower"))
-        detector.lower (strtod (argv[++i], NULL));
+      else if (!strcmp (argv[i], "--min"))
+        detector.min (strtod (argv[++i], NULL));
 
       else if (!strcmp (argv[i], "-s") || !strcmp (argv[i], "--stddev"))
         detector.algorithm ("stddev");

@@ -39,5 +39,4 @@ Suggestions
 
 - percentiles
 - truly ignore non-numeric inputs
-- rename 'upper' and 'lower' to 'min', 'max'.
 
