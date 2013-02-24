@@ -86,10 +86,10 @@ Anomalous data detected.  The value 10 is above the maximum of 8.
 .SH DETECTION - STANDARD DEVIATION
 Standard deviation measures differences from the mean value of a sample of data,
 and is useful for detecting extraordinary values.  The sample size can be chosen
-such that there is enough data to determine a good mean value.  The limited
-sample size means that a rolling window of data is used, and therefore the mean
-and standard deviation is updated for the current window.  This makes the
-monitoring somewhat adaptive.  Here is an example:
+such that there is enough data to determine a good mean value, but defaults to
+10.  The limited sample size means that a rolling window of data is used, and
+therefore the mean and standard deviation is updated for the current window.
+This makes the monitoring somewhat adaptive.  Here is an example:
 
 .RS
 anomaly --stddev --sample 20

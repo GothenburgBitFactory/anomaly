@@ -48,8 +48,8 @@ static int usage ()
             << "\n"
             << "Detection: Standard Deviation\n"
             << "  -s|--stddev             Standard Deviation algorithm (default)\n"
-            << "  -n|--sample N           Sample size\n"
-            << "  -c|--coefficient N      Coefficient for --stddev\n"
+            << "  -n|--sample N           Sample size (default: 10)\n"
+            << "  -c|--coefficient N      Coefficient for --stddev (default: 1.0)\n"
             << "\n"
             << "Responses:\n"
             << "  -q|--quiet              Suppresses anomaly description output\n"
@@ -107,9 +107,6 @@ int main (int argc, char** argv)
 {
   try
   {
-    if (argc < 2)
-      return usage ();
-
     Detector detector;
 
     // Process command line arguments.
