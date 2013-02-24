@@ -34,3 +34,10 @@ Reaction
     -sigusr1 <pid>
     -log <file>
 
+Suggestions
+-----------
+
+- percentiles
+- truly ignore non-numeric inputs
+- rename 'upper' and 'lower' to 'min', 'max'.
+

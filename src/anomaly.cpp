@@ -26,6 +26,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
 #include <Detector.h>
 #include <cmake.h>
 #include <commit.h>
