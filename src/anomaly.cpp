@@ -40,6 +40,7 @@ static int usage ()
             << "Options:\n"
             << "  -h|--help               Show this message\n"
             << "  -v|--version            Show anomaly version & copyright\n"
+            << "  -d|--details            Show internal details\n"
             << "\n"
             << "Detection: Threshold\n"
             << "  -t|--threshold          Threshold algorithm\n"
@@ -117,6 +118,9 @@ int main (int argc, char** argv)
 
       else if (!strcmp (argv[i], "-v") || !strcmp (argv[i], "--version"))
         return version ();
+
+      else if (!strcmp (argv[i], "-d") || !strcmp (argv[i], "--details"))
+        detector.debug ();
 
       else if (!strcmp (argv[i], "-t") || !strcmp (argv[i], "--threshold"))
         detector.algorithm ("threshold");

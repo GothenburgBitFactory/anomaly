@@ -1,5 +1,11 @@
 ------ current release ---------------------------
 
+1.1.0 () <>
+ + Implements '--details' to show internal calculations.
+ + Documentation updates, corrections.
+
+------ old releases ------------------------------
+
 1.0.0 (2013-02-24) <sha1>
  + Unit test suite.
  + Implements '--pid' to signal a program on detection.
@@ -10,8 +16,6 @@
  + Implements '--threshold' detection with '--min' and '--max' bounds support.
  + Complete anomaly.1 man page, with examples.
  + Uses cmake build system.
-
------- old releases ------------------------------
 
 Project started February 23, 2013.
 

@@ -41,6 +41,7 @@ public:
   void quiet ();
   void execute (const std::string&);
   void pid (int);
+  void debug ();
 
   void run ();
 
@@ -63,6 +64,8 @@ private:
   bool        _quiet;
   std::string _script;
   int         _pid;
+  bool        _debug;
+  long long   _counter;
 };
 
 #endif

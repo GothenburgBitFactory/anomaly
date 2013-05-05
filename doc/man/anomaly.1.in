@@ -1,10 +1,10 @@
-.TH anomaly 1 YYYY-MM-DD "${PACKAGE_STRING}" "User Manuals"
+.TH anomaly 1 2013-05-05 "${PACKAGE_STRING}" "User Manuals"
 
 .SH NAME
 anomaly \- anomalous data detection
 
 .SH SYNOPSIS
-.B anomaly [-h|--help] [-v|--version]
+.B anomaly [-h|--help] [-v|--version] [-d|--details]
         [-t|--threshold] [--min N] [--max N]
         [-s|--stddev] [-n|--sample N] [-c|--coefficient N]
         [-q|--quiet]
@@ -133,7 +133,8 @@ $ echo 1 2 3 | anomaly --threshold --max 2.5
 Anomalous data detected.  The value 3 is above the maximum of 2.5.
 .RE
 
-The message can be suppressed, but another response must be specified:
+The message can be suppressed, but another response must be specified, so that
+there is some kind of response:
 
 .RS
 $ echo 1 2 3 | anomaly --threshold --max 2.5 --quiet ...
@@ -145,6 +146,7 @@ the 'date' command, but any program can be used:
 
 .RS
 $ echo 1 2 3 | anomaly --threshold --max 2.5 --quiet --execute '/bin/date +%s'
+.br
 1361727327
 .RE
 

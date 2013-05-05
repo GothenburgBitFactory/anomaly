@@ -44,6 +44,8 @@ Detector::Detector ()
 , _quiet (false)
 , _script ("")
 , _pid (0)
+, _debug (false)
+, _counter (0)
 {
 }
 
@@ -117,6 +119,12 @@ void Detector::pid (int value)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+void Detector::debug ()
+{
+  _debug = true;
+}
+
+////////////////////////////////////////////////////////////////////////////////
 void Detector::run ()
 {
        if (_algorithm == "threshold") run_threshold ();
@@ -139,6 +147,29 @@ void Detector::run_threshold ()
   double input;
   while (std::cin >> input)
   {
+    ++_counter;
+    if (_debug)
+    {
+      std::cout << "[" << _counter << "] ";
+
+      if (_use_min)
+        std::cout << "min " << _min << " <= ";
+
+      std::cout << "value " << input;
+
+      if (_use_max)
+        std::cout << " <= max " << _max;
+
+      if (_use_min && input < _min)
+        std::cout << " = Anomaly\n";
+
+      else if (_use_max && input > _max)
+        std::cout << " = Anomaly\n";
+
+      else
+        std::cout << " = Nominal\n";
+    }
+
     if (_use_max && input > _max)
     {
       std::stringstream s;
@@ -181,6 +212,8 @@ void Detector::run_stddev ()
   double input;
   while (std::cin >> input)
   {
+    ++_counter;
+
     if (data.size () >= _sample)
     {
       // Calculate mean, standard deviation.
@@ -199,6 +232,15 @@ void Detector::run_stddev ()
 
       if (input < (mean - (_coefficient * sigma)))
       {
+        if (_debug)
+          std::cout << "[" << _counter << "] "
+                    << "mean " << mean
+                    << ", sigma " << sigma
+                    << ", coeff " << _coefficient
+                    << ", value " << input
+                    << " < " << (mean - (_coefficient * sigma))
+                    << " = Anomaly\n";
+
         std::stringstream s;
         s << "Anomalous data detected.  The value "
           << input
@@ -213,6 +255,15 @@ void Detector::run_stddev ()
       }
       else if (input > (mean + (_coefficient * sigma)))
       {
+        if (_debug)
+          std::cout << "[" << _counter << "] "
+                    << "mean " << mean
+                    << ", sigma " << sigma
+                    << ", coeff " << _coefficient
+                    << ", value " << input
+                    << " > " << (mean + (_coefficient * sigma))
+                    << " = Anomaly\n";
+
         std::stringstream s;
         s << "Anomalous data detected.  The value "
           << input
@@ -225,6 +276,25 @@ void Detector::run_stddev ()
           << ".";
         react (s.str ());
       }
+      else
+      {
+        if (_debug)
+          std::cout << "[" << _counter << "] "
+                    << "mean " << mean
+                    << ", sigma " << sigma
+                    << ", coeff " << _coefficient
+                    << ", " << (mean - (_coefficient * sigma))
+                    << " <= value " << input
+                    << " <= " << (mean + (_coefficient * sigma))
+                    << " = Nominal\n";
+      }
+    }
+    else
+    {
+      if (_debug)
+        std::cout << "[" << _counter << "] "
+                  << "value " << input
+                  << ", insufficient data - need " << _sample << " items\n";
     }
 
     data.push_back (input);
