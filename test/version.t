@@ -33,7 +33,7 @@ use Test::More tests => 1;
 my $year = (localtime (time))[5] + 1900;
 
 my $output = qx{../src/anomaly --version 2>&1};
-like ($output, qr/Copyright \(C\) $year/, 'Copyright is current');
+like ($output, qr/Copyright \(C\) \d{4} - $year/, 'Copyright is current');
 
 exit 0;
 
