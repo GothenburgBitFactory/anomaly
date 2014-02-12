@@ -3,6 +3,7 @@
 1.1.0 () <>
  + Implements '--details' to show internal calculations.
  + Documentation updates, corrections.
+ + New URLs.
 
 ------ old releases ------------------------------
 

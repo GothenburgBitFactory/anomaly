@@ -97,7 +97,7 @@ static int version ()
                "license, which may be found in the source kit.\n"
             << "\n"
             << "Documentation for anomaly can be found using 'man anomaly' "
-               "or at http://tasktools.org/projects/anomaly.html\n"
+               "or at http://tasktools.org/anomaly.html\n"
             << "\n";
 
   return 0;
