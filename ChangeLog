@@ -4,6 +4,8 @@
 - Implements '--details' to show internal calculations.
 - Documentation updates, corrections.
 - New URLs.
+- TW-1296 make test/run_all exit with non-zero code if a test fail (thanks to
+          Jakub Wilk).
 
 ------ old releases ------------------------------
 
