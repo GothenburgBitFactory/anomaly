@@ -105,10 +105,10 @@ Anomalous data detected.  The value 6 is more than 1 sigma(s)
 above the mean value 3, with a sample size of 5.
 .RE
 
-With a sample size of 5, comparisons being only after the 6th value is seen.  In
+With a sample size of 5, comparisons begin only after the 6th value is seen.  In
 the example, the mean value of [1 2 3 4 5] is 3, and the standard deviation is
-1.58.  This means that the 6th value is considered an anomaly if it is within
-the range (3 +/- 1.58), which is between 1.42 and 4.58.
+1.58.  This means that the 6th value is considered an anomaly if it is outside
+the range (3 +/- 1.58), which is from 1.42 to 4.58.
 
 To make this less sensitive, a coefficient is introduced, which defaults to 1.0
 (as above) but can be overridden:
