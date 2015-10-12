@@ -214,7 +214,6 @@ void Detector::run_stddev ()
   while (std::cin >> input)
   {
     ++_counter;
-
     if (data.size () >= static_cast<unsigned int> (_sample))
     {
       // Calculate mean, standard deviation.
@@ -298,7 +297,7 @@ void Detector::run_stddev ()
     }
 
     data.push_back (input);
-    if (data.size () >= static_cast<unsigned int> (_sample))
+    if (data.size () > static_cast<unsigned int> (_sample))
       data.pop_front ();
   }
 }
