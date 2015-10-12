@@ -3,7 +3,7 @@ cmake_minimum_required (VERSION 2.8)
 set (HAVE_CMAKE true)
 
 project (anomaly)
-set (PROJECT_VERSION "1.0.0")
+set (PROJECT_VERSION "1.1.0")
 
 SET (ANOMALY_MAN3DIR share/man/man1    CACHE STRING "Installation directory for man pages, section 1")
 SET (ANOMALY_LIBDIR  lib               CACHE STRING "Installation directory for the library")
