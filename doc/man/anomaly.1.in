@@ -1,4 +1,4 @@
-.TH anomaly 1 2013-05-05 "${PACKAGE_STRING}" "User Manuals"
+.TH anomaly 1 2015-10-12 "${PACKAGE_STRING}" "User Manuals"
 
 .SH NAME
 anomaly \- anomalous data detection

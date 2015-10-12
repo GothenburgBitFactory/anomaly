@@ -1,6 +1,6 @@
 ------ current release ---------------------------
 
-1.1.0 () <>
+1.1.0 ()
 - Implements '--details' to show internal calculations.
 - Documentation updates, corrections.
 - New URLs.
@@ -10,7 +10,7 @@
 
 ------ old releases ------------------------------
 
-1.0.0 (2013-02-24) <sha1>
+1.0.0 (2013-02-24)
 - Unit test suite.
 - Implements '--pid' to signal a program on detection.
 - Implements '--execute' to run arbitrary programs on detection.
