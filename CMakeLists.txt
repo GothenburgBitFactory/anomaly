@@ -3,7 +3,7 @@ set(CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
 set (HAVE_CMAKE true)
 
 project (anomaly)
-set (PROJECT_VERSION "1.0.0")
+set (PROJECT_VERSION "1.1.0")
 
 message ("CMAKE_SYSTEM_NAME ${CMAKE_SYSTEM_NAME}")
 
@@ -27,7 +27,7 @@ elseif (_HAS_GNU0X)
   message (WARNING "Enabling -std=gnu++0x draft compile flag. Your compiler does not support the standard '-std=c++11' option. Consider upgrading.")
   set (_CXX11_FLAGS "-std=gnu++0x")
 else (_HAS_CXX11)
- message (FATAL_ERROR "C++11 support missing. Try upgrading your C++ compiler. If you have a good reason for using an outdated compiler, please let us know at support@taskwarrior.org.")
+ message (FATAL_ERROR "C++11 support missing. Try upgrading your C++ compiler. If you have a good reason for using an outdated compiler, please let us know at support@tasktools.org.")
 endif (_HAS_CXX11)
 
 SET (ANOMALY_MAN3DIR share/man/man1    CACHE STRING "Installation directory for man pages, section 1")
