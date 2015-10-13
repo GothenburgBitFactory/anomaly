@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
+// anomaly - Anomalous data detection
 //
 // Copyright 2013 - 2015, Göteborg Bit Factory.
 //
@@ -23,12 +24,11 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-#include <cmake.h>
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
 #include <Detector.h>
+#include <cmake.h>
 #include <commit.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,25 +72,21 @@ static int version ()
 #endif
             << " built for "
 #if defined (DARWIN)
-            << "Darwin"
+            << "darwin"
 #elif defined (SOLARIS)
-            << "Solaris"
+            << "solaris"
 #elif defined (CYGWIN)
-            << "Cygwin"
-#elif defined (HAIKU)
-            << "Haiku"
+            << "cygwin"
 #elif defined (OPENBSD)
-            << "OpenBSD"
-#elif defined (FREEBSD)
-            << "FreeBSD"
+            << "openbsd"
+#elif defined (HAIKU)
+            << "haiku"
 #elif defined (NETBSD)
-            << "NetBSD"
+            << "netbsd"
+#elif defined (FREEBSD)
+            << "freebsd"
 #elif defined (LINUX)
-            << "Linux"
-#elif defined (KFREEBSD)
-            << "GNU/kFreeBSD"
-#elif defined (GNUHURD)
-            << "GNU/Hurd"
+            << "linux"
 #else
             << "unknown"
 #endif
