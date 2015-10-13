@@ -7,8 +7,6 @@
 - TW-1296 make test/run_all exit with non-zero code if a test fail (thanks to
           Jakub Wilk).
 - Fixed errors in man page (thanks to Aleksej).
-- Updated source to C++11
-- Fixed build warnings.
 
 ------ old releases ------------------------------
 
