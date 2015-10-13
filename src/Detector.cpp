@@ -1,4 +1,5 @@
 ////////////////////////////////////////////////////////////////////////////////
+// Detector - Anomalous data detection
 //
 // Copyright 2013 - 2015, Göteborg Bit Factory.
 //
@@ -23,15 +24,13 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
-
-#include <cmake.h>
-#include <Detector.h>
 #include <iostream>
 #include <sstream>
 #include <deque>
 #include <stdlib.h>
 #include <math.h>
 #include <signal.h>
+#include <Detector.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 Detector::Detector ()
@@ -215,15 +214,16 @@ void Detector::run_stddev ()
   {
     ++_counter;
 
-    if (data.size () >= static_cast<unsigned int> (_sample))
+    if (data.size () >= _sample)
     {
       // Calculate mean, standard deviation.
       double sum = 0.0;
       double sum_squares = 0.0;
-      for (auto& i : data)
+      std::deque <double>::iterator i;
+      for (i = data.begin (); i != data.end (); ++i)
       {
-        sum += i;
-        sum_squares += i * i;
+        sum += *i;
+        sum_squares += (*i) * (*i);
       }
 
       double sigma = sqrt (((_sample * sum_squares) - (sum * sum)) /
@@ -298,7 +298,7 @@ void Detector::run_stddev ()
     }
 
     data.push_back (input);
-    if (data.size () >= static_cast<unsigned int> (_sample))
+    if (data.size () > _sample)
       data.pop_front ();
   }
 }
