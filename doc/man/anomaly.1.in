@@ -161,7 +161,7 @@ This sends the USR1 signal to the process with PID 12345.  The receiving program
 would need to respond accordingly.
 
 .SH "CREDITS & COPYRIGHTS"
-Copyright (C) 2013 - 2015 Göteborg Bit Factory.
+Copyright (C) 2013 - 2016 Göteborg Bit Factory.
 
 Anomaly is distributed under the MIT license. See
 http://www.opensource.org/licenses/mit-license.php for more information.

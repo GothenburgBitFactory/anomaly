@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-// Copyright 2013 - 2015, Göteborg Bit Factory.
+// Copyright 2013 - 2016, Göteborg Bit Factory.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -95,7 +95,7 @@ static int version ()
             << "unknown"
 #endif
             << "\n"
-            << "Copyright (C) 2013 - 2015 Göteborg Bit Factory\n"
+            << "Copyright (C) 2013 - 2016 Göteborg Bit Factory\n"
             << "\n"
             << "Anomaly may be copied only under the terms of the MIT "
                "license, which may be found in the source kit.\n"
