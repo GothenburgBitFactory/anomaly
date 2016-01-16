@@ -34,7 +34,7 @@ my $output = qx{../src/anomaly --foo};
 like ($output, qr/Unrecognized/, 'Unrecognized arg -foo');
 
 $output = qx{../src/anomaly --threshold --max 3.1 --min 3.2};
-like ($output, qr/must be min/, '--min > --higher');
+like ($output, qr/must be lower/, '--min > --higher');
 
 $output = qx{../src/anomaly --threshold --min 3.2 --max 3.1};
 like ($output, qr/must be higher/, '--min > --higher');
