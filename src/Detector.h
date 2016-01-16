@@ -64,7 +64,6 @@ private:
   std::string _script      {};
   int         _pid         {0};
   bool        _debug       {false};
-  long long   _counter     {0};
 };
 
 #endif

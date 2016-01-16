@@ -128,13 +128,14 @@ void Detector::run_threshold ()
       _script == "")
     throw std::string ("A reaction must be specified.");
 
+  long long counter {0};
   double input;
   while (std::cin >> input)
   {
-    ++_counter;
+    ++counter;
     if (_debug)
     {
-      std::cout << "[" << _counter << "] ";
+      std::cout << "[" << counter << "] ";
 
       if (_use_min)
         std::cout << "min " << _min << " <= ";
@@ -193,10 +194,11 @@ void Detector::run_stddev ()
     throw std::string ("A reaction must be specified.");
 
   std::deque <double> data;
+  long long counter {0};
   double input;
   while (std::cin >> input)
   {
-    ++_counter;
+    ++counter;
     if (data.size () >= static_cast<unsigned int> (_sample))
     {
       // Calculate mean, standard deviation.
@@ -215,7 +217,7 @@ void Detector::run_stddev ()
       if (input < (mean - (_coefficient * sigma)))
       {
         if (_debug)
-          std::cout << "[" << _counter << "] "
+          std::cout << "[" << counter << "] "
                     << "mean " << mean
                     << ", sigma " << sigma
                     << ", coeff " << _coefficient
@@ -238,7 +240,7 @@ void Detector::run_stddev ()
       else if (input > (mean + (_coefficient * sigma)))
       {
         if (_debug)
-          std::cout << "[" << _counter << "] "
+          std::cout << "[" << counter << "] "
                     << "mean " << mean
                     << ", sigma " << sigma
                     << ", coeff " << _coefficient
@@ -261,7 +263,7 @@ void Detector::run_stddev ()
       else
       {
         if (_debug)
-          std::cout << "[" << _counter << "] "
+          std::cout << "[" << counter << "] "
                     << "mean " << mean
                     << ", sigma " << sigma
                     << ", coeff " << _coefficient
@@ -274,7 +276,7 @@ void Detector::run_stddev ()
     else
     {
       if (_debug)
-        std::cout << "[" << _counter << "] "
+        std::cout << "[" << counter << "] "
                   << "value " << input
                   << ", insufficient data - need " << _sample << " items\n";
     }
