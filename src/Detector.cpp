@@ -74,7 +74,7 @@ void Detector::max (double value)
 void Detector::min (double value)
 {
   if (_use_max && value > _max)
-    throw std::string ("The min value must be min than the max value.");
+    throw std::string ("The min value must be lower than the max value.");
 
   _use_min = true;
   _min = value;
