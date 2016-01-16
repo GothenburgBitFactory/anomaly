@@ -109,14 +109,14 @@ void Detector::debug ()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::run ()
+void Detector::run () const
 {
        if (_algorithm == "threshold") run_threshold ();
   else if (_algorithm == "stddev")    run_stddev ();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::run_threshold ()
+void Detector::run_threshold () const
 {
   // Make sure settings are acceptable.
   if (!_use_max && !_use_min)
@@ -179,7 +179,7 @@ void Detector::run_threshold ()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::run_stddev ()
+void Detector::run_stddev () const
 {
   // Make sure settings are acceptable.
   if (_sample < 2)
@@ -288,7 +288,7 @@ void Detector::run_stddev ()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react (const std::string& message)
+void Detector::react (const std::string& message) const
 {
   react_complain (message);
   react_sigusr1 ();
@@ -296,21 +296,21 @@ void Detector::react (const std::string& message)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react_complain (const std::string& message)
+void Detector::react_complain (const std::string& message) const
 {
   if (!_quiet)
     std::cout << message << "\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react_execute ()
+void Detector::react_execute () const
 {
   if (_script != "")
     system (_script.c_str ());
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react_sigusr1 ()
+void Detector::react_sigusr1 () const
 {
   if (_pid)
     kill (_pid, SIGUSR1);

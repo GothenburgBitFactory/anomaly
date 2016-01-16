@@ -42,15 +42,15 @@ public:
   void pid (int);
   void debug ();
 
-  void run ();
+  void run () const;
 
 private:
-  void run_threshold ();
-  void run_stddev ();
-  void react (const std::string&);
-  void react_complain (const std::string&);
-  void react_execute ();
-  void react_sigusr1 ();
+  void run_threshold () const;
+  void run_stddev () const;
+  void react (const std::string&) const;
+  void react_complain (const std::string&) const;
+  void react_execute () const;
+  void react_sigusr1 () const;
 
 private:
   std::string _algorithm   {"stddev"};
