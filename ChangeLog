@@ -10,6 +10,8 @@
 - Updated source to C++11
 - Fixed build warnings.
 - Fixed bug with stddev queue removal.
+- Fixed bug with exec/signal switch.
+- Fixed errors in error messages.
 
 ------ old releases ------------------------------
 
