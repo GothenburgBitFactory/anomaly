@@ -29,9 +29,9 @@
 #include <iostream>
 #include <sstream>
 #include <deque>
-#include <stdlib.h>
-#include <math.h>
-#include <signal.h>
+#include <cstdlib>
+#include <cmath>
+#include <csignal>
 
 ////////////////////////////////////////////////////////////////////////////////
 void Detector::algorithm (const std::string& value)
