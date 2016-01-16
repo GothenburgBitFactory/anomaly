@@ -34,23 +34,6 @@
 #include <signal.h>
 
 ////////////////////////////////////////////////////////////////////////////////
-Detector::Detector ()
-: _algorithm ("stddev")
-, _use_max (false)
-, _use_min (false)
-, _max (0.0)
-, _min (0.0)
-, _sample (10)
-, _coefficient (1.0)
-, _quiet (false)
-, _script ("")
-, _pid (0)
-, _debug (false)
-, _counter (0)
-{
-}
-
-////////////////////////////////////////////////////////////////////////////////
 void Detector::algorithm (const std::string& value)
 {
   if (value != "stddev" &&

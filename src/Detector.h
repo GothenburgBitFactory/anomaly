@@ -32,7 +32,6 @@
 class Detector
 {
 public:
-  Detector ();
   void algorithm (const std::string&);
   void max (double);
   void min (double);
@@ -54,18 +53,18 @@ private:
   void react_sigusr1 ();
 
 private:
-  std::string _algorithm;
-  bool        _use_max;
-  bool        _use_min;
-  double      _max;
-  double      _min;
-  int         _sample;
-  double      _coefficient;
-  bool        _quiet;
-  std::string _script;
-  int         _pid;
-  bool        _debug;
-  long long   _counter;
+  std::string _algorithm   {"stddev"};
+  bool        _use_max     {false};
+  bool        _use_min     {false};
+  double      _max         {0.0};
+  double      _min         {0.0};
+  int         _sample      {10};
+  double      _coefficient {1.0};
+  bool        _quiet       {false};
+  std::string _script      {};
+  int         _pid         {0};
+  bool        _debug       {false};
+  long long   _counter     {0};
 };
 
 #endif
