@@ -8,3 +8,5 @@ include_directories (${CMAKE_SOURCE_DIR}
 
 add_custom_target (test ./run_all WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/test)
 
+configure_file(run_all run_all COPYONLY)
+configure_file(problems problems COPYONLY)
