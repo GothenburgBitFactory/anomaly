@@ -1,11 +1,15 @@
 ------ current release ---------------------------
 
 1.1.0 ()
+- TD-120  Missing cmakedefine for HAVE_GET_CURRENT_DIR_NAME
+          (Thanks to Jörg Krause, Ben Boeckel).
+- TW-1296 make test/run_all exit with non-zero code if a test fail (thanks to
+          Jakub Wilk).
+- TW-1845 Cygwin build fails, missing get_current_dir_name
+          (thanks to hosaka).
 - Implements '--details' to show internal calculations.
 - Documentation updates, corrections.
 - New URLs.
-- TW-1296 make test/run_all exit with non-zero code if a test fail (thanks to
-          Jakub Wilk).
 - Fixed errors in man page (thanks to Aleksej).
 - Updated source to C++11
 - Fixed build warnings.
