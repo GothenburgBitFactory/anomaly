@@ -16,6 +16,7 @@
 - Fixed bug with stddev queue removal.
 - Fixed bug with exec/signal switch.
 - Fixed errors in error messages.
+- Now uses common CMake tools.
 
 ------ old releases ------------------------------
 
