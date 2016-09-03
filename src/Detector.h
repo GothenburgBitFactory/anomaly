@@ -32,6 +32,7 @@
 class Detector
 {
 public:
+  Detector () = default;
   void algorithm (const std::string&);
   void max (double);
   void min (double);
