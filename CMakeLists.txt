@@ -1,33 +1,12 @@
 cmake_minimum_required (VERSION 2.8)
-
+set (CMAKE_LEGACY_CYGWIN_WIN32 0) # Remove when CMake >= 2.8.4 is required
+set (CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 set (HAVE_CMAKE true)
 
 project (anomaly)
-set (PROJECT_VERSION "1.0.0")
+include (CXXSniffer)
 
-SET (ANOMALY_MAN3DIR share/man/man1    CACHE STRING "Installation directory for man pages, section 1")
-SET (ANOMALY_LIBDIR  lib               CACHE STRING "Installation directory for the library")
-SET (ANOMALY_DOCDIR  share/doc/anomaly CACHE STRING "Installation directory for doc files")
-
-if (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-  set (LINUX true)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-  set (DARWIN true)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "kFreeBSD")
-  set (KFREEBSD true)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "FreeBSD")
-  set (FREEBSD true)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "OpenBSD")
-  set (OPENBSD true)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "NetBSD")
-  set (NETBSD true)
-elseif (${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
-  set (SOLARIS true)
-elseif (${CMAKE_SYSTEM_NAME} STREQUAL "GNU")
-  set (GNUHURD true)
-else (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
-  set (UNKNOWN true)
-endif (${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+set (PROJECT_VERSION "1.1.0")
 
 message ("-- Looking for SHA1 references")
 if (EXISTS ${CMAKE_SOURCE_DIR}/.git/index)
@@ -42,11 +21,15 @@ endif (EXISTS ${CMAKE_SOURCE_DIR}/.git/index)
 
 set (PACKAGE "${PROJECT_NAME}")
 set (VERSION "${PROJECT_VERSION}")
-set (PACKAGE_BUGREPORT "support@yootabory.org")
+set (PACKAGE_BUGREPORT "support@taskwarrior.org")
 set (PACKAGE_NAME "${PACKAGE}")
 set (PACKAGE_TARNAME "${PACKAGE}")
 set (PACKAGE_VERSION "${VERSION}")
 set (PACKAGE_STRING "${PACKAGE} ${VERSION}")
+
+SET (ANOMALY_MAN3DIR share/man/man1    CACHE STRING "Installation directory for man pages, section 1")
+SET (ANOMALY_LIBDIR  lib               CACHE STRING "Installation directory for the library")
+SET (ANOMALY_DOCDIR  share/doc/anomaly CACHE STRING "Installation directory for doc files")
 
 message ("-- Configuring cmake.h")
 configure_file (
@@ -55,9 +38,9 @@ configure_file (
 
 add_subdirectory (src)
 add_subdirectory (doc)
-if (EXISTS test)
+if (EXISTS ${CMAKE_SOURCE_DIR}/test)
   add_subdirectory (test EXCLUDE_FROM_ALL)
-endif (EXISTS test)
+endif (EXISTS ${CMAKE_SOURCE_DIR}/test)
 
 set (doc_FILES NEWS ChangeLog INSTALL AUTHORS COPYING)
 foreach (doc_FILE ${doc_FILES})
@@ -71,5 +54,5 @@ set (CPACK_SOURCE_PACKAGE_FILE_NAME ${PACKAGE_NAME}-${PACKAGE_VERSION})
 set (CPACK_SOURCE_IGNORE_FILES  "CMakeCache" "CMakeFiles" "CPackConfig" "CPackSourceConfig"
                                 "_CPack_Packages" "cmake_install" "install_manifest"
                                 "Makefile$" "test"
-                                "/\\.gitignore" "/\\.git/" "swp$")
+                                "/\\\\.gitignore" "/\\\\.git/" "swp$")
 include (CPack)

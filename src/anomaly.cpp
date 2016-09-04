@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
-// anomaly - Anomalous data detection
 //
-// Copyright 2013 - 2015, Göteborg Bit Factory.
+// Copyright 2013 - 2016, Göteborg Bit Factory.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,11 +23,12 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+#include <cmake.h>
 #include <iostream>
 #include <stdlib.h>
 #include <string.h>
 #include <Detector.h>
-#include <cmake.h>
 #include <commit.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -72,26 +72,30 @@ static int version ()
 #endif
             << " built for "
 #if defined (DARWIN)
-            << "darwin"
+            << "Darwin"
 #elif defined (SOLARIS)
-            << "solaris"
+            << "Solaris"
 #elif defined (CYGWIN)
-            << "cygwin"
-#elif defined (OPENBSD)
-            << "openbsd"
+            << "Cygwin"
 #elif defined (HAIKU)
-            << "haiku"
-#elif defined (NETBSD)
-            << "netbsd"
+            << "Haiku"
+#elif defined (OPENBSD)
+            << "OpenBSD"
 #elif defined (FREEBSD)
-            << "freebsd"
+            << "FreeBSD"
+#elif defined (NETBSD)
+            << "NetBSD"
 #elif defined (LINUX)
-            << "linux"
+            << "Linux"
+#elif defined (KFREEBSD)
+            << "GNU/kFreeBSD"
+#elif defined (GNUHURD)
+            << "GNU/Hurd"
 #else
             << "unknown"
 #endif
             << "\n"
-            << "Copyright (C) 2013 - 2015 Göteborg Bit Factory\n"
+            << "Copyright (C) 2013 - 2016 Göteborg Bit Factory\n"
             << "\n"
             << "Anomaly may be copied only under the terms of the MIT "
                "license, which may be found in the source kit.\n"
@@ -126,25 +130,25 @@ int main (int argc, char** argv)
         detector.algorithm ("threshold");
 
       else if (!strcmp (argv[i], "--max"))
-        detector.max (strtod (argv[++i], NULL));
+        detector.max (strtod (argv[++i], nullptr));
 
       else if (!strcmp (argv[i], "--min"))
-        detector.min (strtod (argv[++i], NULL));
+        detector.min (strtod (argv[++i], nullptr));
 
       else if (!strcmp (argv[i], "-s") || !strcmp (argv[i], "--stddev"))
         detector.algorithm ("stddev");
 
       else if (!strcmp (argv[i], "-n") || !strcmp (argv[i], "--sample"))
-        detector.sample (strtol (argv[++i], NULL, 10));
+        detector.sample (strtol (argv[++i], nullptr, 10));
 
       else if (!strcmp (argv[i], "-c") || !strcmp (argv[i], "--coefficient"))
-        detector.coefficient (strtod (argv[++i], NULL));
+        detector.coefficient (strtod (argv[++i], nullptr));
 
       else if (!strcmp (argv[i], "-q") || !strcmp (argv[i], "--quiet"))
         detector.quiet ();
 
       else if (!strcmp (argv[i], "-p") || !strcmp (argv[i], "--pid"))
-        detector.pid (strtol (argv[++i], NULL, 10));
+        detector.pid (strtol (argv[++i], nullptr, 10));
 
       else if (!strcmp (argv[i], "-e") || !strcmp (argv[i], "--execute"))
         detector.execute (argv[++i]);

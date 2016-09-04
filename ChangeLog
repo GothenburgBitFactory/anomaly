@@ -1,16 +1,28 @@
 ------ current release ---------------------------
 
-1.1.0 () <>
+1.1.0 (2016-09-04) a8541da8ec1a59ea6f3db1c2bb4d8fe1787027ef
+- TD-120  Missing cmakedefine for HAVE_GET_CURRENT_DIR_NAME
+          (thanks to Jörg Krause, Ben Boeckel).
+- TW-1296 make test/run_all exit with non-zero code if a test fail
+          (thanks to Jakub Wilk).
+- TW-1845 Cygwin build fails, missing get_current_dir_name
+          (thanks to hosaka).
 - Implements '--details' to show internal calculations.
 - Documentation updates, corrections.
 - New URLs.
-- TW-1296 make test/run_all exit with non-zero code if a test fail (thanks to
-          Jakub Wilk).
-- Fixed errors in man page (thanks to Aleksej).
+- Fixed errors in man page
+          (thanks to Aleksej).
+- Updated source to C++11
+- Fixed build warnings.
+- Fixed bug with stddev queue removal.
+- Fixed bug with exec/signal switch.
+- Fixed errors in error messages.
+- Now uses common CMake tools.
+- Test suite converted to Python.
 
 ------ old releases ------------------------------
 
-1.0.0 (2013-02-24) <sha1>
+1.0.0 (2013-02-24)
 - Unit test suite.
 - Implements '--pid' to signal a program on detection.
 - Implements '--execute' to run arbitrary programs on detection.

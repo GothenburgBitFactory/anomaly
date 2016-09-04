@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Detector - Anomalous data detection
 //
-// Copyright 2013 - 2015, Göteborg Bit Factory.
+// Copyright 2013 - 2016, Göteborg Bit Factory.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,30 +23,15 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
+
+#include <cmake.h>
+#include <Detector.h>
 #include <iostream>
 #include <sstream>
 #include <deque>
-#include <stdlib.h>
-#include <math.h>
-#include <signal.h>
-#include <Detector.h>
-
-////////////////////////////////////////////////////////////////////////////////
-Detector::Detector ()
-: _algorithm ("stddev")
-, _use_max (false)
-, _use_min (false)
-, _max (0.0)
-, _min (0.0)
-, _sample (10)
-, _coefficient (1.0)
-, _quiet (false)
-, _script ("")
-, _pid (0)
-, _debug (false)
-, _counter (0)
-{
-}
+#include <cstdlib>
+#include <cmath>
+#include <csignal>
 
 ////////////////////////////////////////////////////////////////////////////////
 void Detector::algorithm (const std::string& value)
@@ -73,7 +57,7 @@ void Detector::max (double value)
 void Detector::min (double value)
 {
   if (_use_max && value > _max)
-    throw std::string ("The min value must be min than the max value.");
+    throw std::string ("The min value must be lower than the max value.");
 
   _use_min = true;
   _min = value;
@@ -125,14 +109,14 @@ void Detector::debug ()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::run ()
+void Detector::run () const
 {
        if (_algorithm == "threshold") run_threshold ();
   else if (_algorithm == "stddev")    run_stddev ();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::run_threshold ()
+void Detector::run_threshold () const
 {
   // Make sure settings are acceptable.
   if (!_use_max && !_use_min)
@@ -144,13 +128,14 @@ void Detector::run_threshold ()
       _script == "")
     throw std::string ("A reaction must be specified.");
 
+  long long counter {0};
   double input;
   while (std::cin >> input)
   {
-    ++_counter;
+    ++counter;
     if (_debug)
     {
-      std::cout << "[" << _counter << "] ";
+      std::cout << "[" << counter << "] ";
 
       if (_use_min)
         std::cout << "min " << _min << " <= ";
@@ -194,7 +179,7 @@ void Detector::run_threshold ()
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::run_stddev ()
+void Detector::run_stddev () const
 {
   // Make sure settings are acceptable.
   if (_sample < 2)
@@ -209,21 +194,20 @@ void Detector::run_stddev ()
     throw std::string ("A reaction must be specified.");
 
   std::deque <double> data;
+  long long counter {0};
   double input;
   while (std::cin >> input)
   {
-    ++_counter;
-
-    if (data.size () >= _sample)
+    ++counter;
+    if (data.size () >= static_cast<unsigned int> (_sample))
     {
       // Calculate mean, standard deviation.
       double sum = 0.0;
       double sum_squares = 0.0;
-      std::deque <double>::iterator i;
-      for (i = data.begin (); i != data.end (); ++i)
+      for (auto& i : data)
       {
-        sum += *i;
-        sum_squares += (*i) * (*i);
+        sum += i;
+        sum_squares += i * i;
       }
 
       double sigma = sqrt (((_sample * sum_squares) - (sum * sum)) /
@@ -233,7 +217,7 @@ void Detector::run_stddev ()
       if (input < (mean - (_coefficient * sigma)))
       {
         if (_debug)
-          std::cout << "[" << _counter << "] "
+          std::cout << "[" << counter << "] "
                     << "mean " << mean
                     << ", sigma " << sigma
                     << ", coeff " << _coefficient
@@ -256,7 +240,7 @@ void Detector::run_stddev ()
       else if (input > (mean + (_coefficient * sigma)))
       {
         if (_debug)
-          std::cout << "[" << _counter << "] "
+          std::cout << "[" << counter << "] "
                     << "mean " << mean
                     << ", sigma " << sigma
                     << ", coeff " << _coefficient
@@ -279,7 +263,7 @@ void Detector::run_stddev ()
       else
       {
         if (_debug)
-          std::cout << "[" << _counter << "] "
+          std::cout << "[" << counter << "] "
                     << "mean " << mean
                     << ", sigma " << sigma
                     << ", coeff " << _coefficient
@@ -292,19 +276,19 @@ void Detector::run_stddev ()
     else
     {
       if (_debug)
-        std::cout << "[" << _counter << "] "
+        std::cout << "[" << counter << "] "
                   << "value " << input
                   << ", insufficient data - need " << _sample << " items\n";
     }
 
     data.push_back (input);
-    if (data.size () > _sample)
+    if (data.size () > static_cast<unsigned int> (_sample))
       data.pop_front ();
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react (const std::string& message)
+void Detector::react (const std::string& message) const
 {
   react_complain (message);
   react_sigusr1 ();
@@ -312,24 +296,24 @@ void Detector::react (const std::string& message)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react_complain (const std::string& message)
+void Detector::react_complain (const std::string& message) const
 {
   if (!_quiet)
     std::cout << message << "\n";
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-void Detector::react_execute ()
-{
-  if (_pid)
-    kill (_pid, SIGUSR1);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-void Detector::react_sigusr1 ()
+void Detector::react_execute () const
 {
   if (_script != "")
     system (_script.c_str ());
+}
+
+////////////////////////////////////////////////////////////////////////////////
+void Detector::react_sigusr1 () const
+{
+  if (_pid)
+    kill (_pid, SIGUSR1);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

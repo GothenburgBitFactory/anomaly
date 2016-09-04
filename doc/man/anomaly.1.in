@@ -1,4 +1,4 @@
-.TH anomaly 1 2013-05-05 "${PACKAGE_STRING}" "User Manuals"
+.TH anomaly 1 2016-09-04 "${PACKAGE_STRING}" "User Manuals"
 
 .SH NAME
 anomaly \- anomalous data detection
@@ -161,7 +161,7 @@ This sends the USR1 signal to the process with PID 12345.  The receiving program
 would need to respond accordingly.
 
 .SH "CREDITS & COPYRIGHTS"
-Copyright (C) 2013 - 2015 Göteborg Bit Factory.
+Copyright (C) 2013 - 2016 Göteborg Bit Factory.
 
 Anomaly is distributed under the MIT license. See
 http://www.opensource.org/licenses/mit-license.php for more information.
@@ -172,7 +172,7 @@ For more information, see:
 
 .TP
 The official site at
-<http://tasktools.org/anomaly.html>
+<http://tasktools.org/projects/anomaly.html>
 
 .TP
 You can contact the project by writing an email to

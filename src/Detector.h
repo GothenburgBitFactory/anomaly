@@ -1,7 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
-// Detector - Anomalous data detection
 //
-// Copyright 2013 - 2015, Göteborg Bit Factory.
+// Copyright 2013 - 2016, Göteborg Bit Factory.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,6 +23,7 @@
 // http://www.opensource.org/licenses/mit-license.php
 //
 ////////////////////////////////////////////////////////////////////////////////
+
 #ifndef INCLUDED_DETECTOR_H
 #define INCLUDED_DETECTOR_H
 
@@ -32,7 +32,7 @@
 class Detector
 {
 public:
-  Detector ();
+  Detector () = default;
   void algorithm (const std::string&);
   void max (double);
   void min (double);
@@ -43,29 +43,28 @@ public:
   void pid (int);
   void debug ();
 
-  void run ();
+  void run () const;
 
 private:
-  void run_threshold ();
-  void run_stddev ();
-  void react (const std::string&);
-  void react_complain (const std::string&);
-  void react_execute ();
-  void react_sigusr1 ();
+  void run_threshold () const;
+  void run_stddev () const;
+  void react (const std::string&) const;
+  void react_complain (const std::string&) const;
+  void react_execute () const;
+  void react_sigusr1 () const;
 
 private:
-  std::string _algorithm;
-  bool        _use_max;
-  bool        _use_min;
-  double      _max;
-  double      _min;
-  int         _sample;
-  double      _coefficient;
-  bool        _quiet;
-  std::string _script;
-  int         _pid;
-  bool        _debug;
-  long long   _counter;
+  std::string _algorithm   {"stddev"};
+  bool        _use_max     {false};
+  bool        _use_min     {false};
+  double      _max         {0.0};
+  double      _min         {0.0};
+  int         _sample      {10};
+  double      _coefficient {1.0};
+  bool        _quiet       {false};
+  std::string _script      {};
+  int         _pid         {0};
+  bool        _debug       {false};
 };
 
 #endif

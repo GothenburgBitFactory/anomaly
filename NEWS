@@ -1,7 +1,7 @@
 
 New Features in anomaly 1.1.0
 
-  -
+  - Adds support for '--details' option to show internal calculations.
 
   Please refer to the ChangeLog file for full details.
 
@@ -9,16 +9,27 @@ New Features in anomaly 1.1.0
 
 Anomaly has been built and tested on the following configurations:
 
-  * OS X 10.8 Mountain Lion
-  * Ubuntu 10.04 Natty Narwhal
-  * Cygwin 1.7
+  * Arch
+  * Cygwin
+  * Debian
+  * Fedora
+  * FreeBSD
+  * Ubuntu
+  * OS X
 
 ---
 
-While anomaly has undergone testing, bugs are sure to remain.  If you encounter
-a bug, please send a message to:
+While Anomaly has undergone testing, bugs are sure to remain.  If you find
+a bug, please enter a new issue at:
 
-  support@tasktools.org
+  https://bug.tasktools.org
+
+Or you can also report the issue in the forums at:
+
+  https://answers.tasktools.org
+
+Or just send a message to:
+
+  support@taskwarrior.org
 
 Thank you.
-
