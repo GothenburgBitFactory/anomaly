@@ -1,6 +1,6 @@
 ------ current release ---------------------------
 
-1.1.0 ()
+1.1.0 (2016-09-04)
 - TD-120  Missing cmakedefine for HAVE_GET_CURRENT_DIR_NAME
           (thanks to Jörg Krause, Ben Boeckel).
 - TW-1296 make test/run_all exit with non-zero code if a test fail
