@@ -35,28 +35,28 @@
 static int usage ()
 {
   std::cout << "\n"
-            << "Usage: anomaly [options]\n"
-            << "\n"
-            << "Options:\n"
-            << "  -h|--help               Show this message\n"
-            << "  -v|--version            Show anomaly version & copyright\n"
-            << "  -d|--details            Show internal details\n"
-            << "\n"
-            << "Detection: Threshold\n"
-            << "  -t|--threshold          Threshold algorithm\n"
-            << "     --min N              Lower threshold\n"
-            << "     --max N              Upper threshold\n"
-            << "\n"
-            << "Detection: Standard Deviation\n"
-            << "  -s|--stddev             Standard Deviation algorithm (default)\n"
-            << "  -n|--sample N           Sample size (default: 10)\n"
-            << "  -c|--coefficient N      Coefficient for --stddev (default: 1.0)\n"
-            << "\n"
-            << "Responses:\n"
-            << "  -q|--quiet              Suppresses anomaly description output\n"
-            << "  -e|--execute PROGRAM    Runs program\n"
-            << "  -p|--pid PID            Sends USR1 signal to pid\n"
-            << "\n";
+               "Usage: anomaly [options]\n"
+               "\n"
+               "Options:\n"
+               "  -h|--help               Show this message\n"
+               "  -v|--version            Show anomaly version & copyright\n"
+               "  -d|--details            Show internal details\n"
+               "\n"
+               "Detection: Threshold\n"
+               "  -t|--threshold          Threshold algorithm\n"
+               "     --min N              Lower threshold\n"
+               "     --max N              Upper threshold\n"
+               "\n"
+               "Detection: Standard Deviation\n"
+               "  -s|--stddev             Standard Deviation algorithm (default)\n"
+               "  -n|--sample N           Sample size (default: 10)\n"
+               "  -c|--coefficient N      Coefficient for --stddev (default: 1.0)\n"
+               "\n"
+               "Responses:\n"
+               "  -q|--quiet              Suppresses anomaly description output\n"
+               "  -e|--execute PROGRAM    Runs program\n"
+               "  -p|--pid PID            Sends USR1 signal to pid\n"
+               "\n";
 
   return 0;
 }
@@ -95,14 +95,14 @@ static int version ()
             << "unknown"
 #endif
             << "\n"
-            << "Copyright (C) 2013 - 2016 Göteborg Bit Factory\n"
-            << "\n"
-            << "Anomaly may be copied only under the terms of the MIT "
+               "Copyright (C) 2013 - 2016 Göteborg Bit Factory\n"
+               "\n"
+               "Anomaly may be copied only under the terms of the MIT "
                "license, which may be found in the source kit.\n"
-            << "\n"
-            << "Documentation for anomaly can be found using 'man anomaly' "
+               "\n"
+               "Documentation for anomaly can be found using 'man anomaly' "
                "or at http://tasktools.org/projects/anomaly.html\n"
-            << "\n";
+               "\n";
 
   return 0;
 }
