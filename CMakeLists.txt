@@ -8,17 +8,6 @@ include (CXXSniffer)
 
 set (PROJECT_VERSION "1.2.0")
 
-message ("-- Looking for SHA1 references")
-if (EXISTS ${CMAKE_SOURCE_DIR}/.git/index)
-  set (HAVE_COMMIT true)
-  execute_process (COMMAND git log -1 --pretty=format:%h
-                   WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-                   OUTPUT_VARIABLE COMMIT)
-  configure_file ( ${CMAKE_SOURCE_DIR}/commit.h.in
-                   ${CMAKE_SOURCE_DIR}/commit.h)
-  message ("-- Found SHA1 reference: ${COMMIT}")
-endif (EXISTS ${CMAKE_SOURCE_DIR}/.git/index)
-
 set (PACKAGE "${PROJECT_NAME}")
 set (VERSION "${PROJECT_VERSION}")
 set (PACKAGE_BUGREPORT "support@taskwarrior.org")
