@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <Detector.h>
+#include <shared.h>
 #include <commit.h>
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -71,29 +72,7 @@ static int version ()
             << COMMIT
 #endif
             << " built for "
-#if defined (DARWIN)
-            << "Darwin"
-#elif defined (SOLARIS)
-            << "Solaris"
-#elif defined (CYGWIN)
-            << "Cygwin"
-#elif defined (HAIKU)
-            << "Haiku"
-#elif defined (OPENBSD)
-            << "OpenBSD"
-#elif defined (FREEBSD)
-            << "FreeBSD"
-#elif defined (NETBSD)
-            << "NetBSD"
-#elif defined (LINUX)
-            << "Linux"
-#elif defined (KFREEBSD)
-            << "GNU/kFreeBSD"
-#elif defined (GNUHURD)
-            << "GNU/Hurd"
-#else
-            << "unknown"
-#endif
+            << osName ()
             << "\n"
                "Copyright (C) 2013 - 2017 Göteborg Bit Factory\n"
                "\n"
