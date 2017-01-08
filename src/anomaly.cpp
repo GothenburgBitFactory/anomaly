@@ -30,7 +30,6 @@
 #include <string.h>
 #include <Detector.h>
 #include <shared.h>
-#include <commit.h>
 
 ////////////////////////////////////////////////////////////////////////////////
 static int usage ()
@@ -67,10 +66,6 @@ static int version ()
 {
   std::cout << "\n"
             << PACKAGE_STRING
-#if defined (HAVE_COMMIT)
-            << "."
-            << COMMIT
-#endif
             << " built for "
             << osName ()
             << "\n"
