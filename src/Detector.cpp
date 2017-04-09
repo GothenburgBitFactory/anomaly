@@ -36,8 +36,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 void Detector::algorithm (const std::string& value)
 {
-  if (value != "stddev" &&
-      value != "threshold")
+  if (value != "stddev" && value != "threshold")
     throw std::string ("Unrecognized algorithm '") + value + "' specified.";
 
   _algorithm = value;
@@ -46,7 +45,7 @@ void Detector::algorithm (const std::string& value)
 ////////////////////////////////////////////////////////////////////////////////
 void Detector::max (double value)
 {
-  if (_use_min && value < _min)
+  if (_use_min &&value < _min)
     throw std::string ("The max value must be higher than the min value.");
 
   _use_max = true;
@@ -119,13 +118,11 @@ void Detector::run () const
 void Detector::run_threshold () const
 {
   // Make sure settings are acceptable.
-  if (!_use_max && !_use_min)
+  if (! _use_max && !_use_min)
     throw std::string ("A min, and max, or both threshold values should be "
                        "specified.");
 
-  if (_quiet &&
-      _pid == 0 &&
-      _script == "")
+  if (_quiet && _pid == 0 && _script == "")
     throw std::string ("A reaction must be specified.");
 
   long long counter {0};
