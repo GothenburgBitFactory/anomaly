@@ -11,6 +11,8 @@
           (thanks to Jakub Wilk).
 - TW-1845 Cygwin build fails, missing get_current_dir_name
           (thanks to hosaka).
+- TW-1936 Tweak tests to have fuller TAP compliance
+          (thanks to Paul J. Fenwick)
 - Implements '--details' to show internal calculations.
 - Documentation updates, corrections.
 - New URLs.
